@@ -1,0 +1,6 @@
+/**
+ * Cell
+ */
+public class Cell {
+
+}

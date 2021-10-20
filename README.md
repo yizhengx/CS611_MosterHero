@@ -1,2 +1,3 @@
-# CS611_MosterHero
- CS611 2021 Fall - Assginment Mosters and Heroes
+# CS611 Assignment 3 MostersHeroes
+`Yizheng Xie & U49925993`
+
