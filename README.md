@@ -24,3 +24,26 @@
 
    
 
+
+
+
+
+#### 2. Design Pattern
+
+- Strategy Pattern
+
+  ```
+  interface WeaponBehavior
+  attack()
+  
+  
+  ```
+
+  ```
+  interface SpellBehavior
+  spellAttack()
+  
+  
+  ```
+
+  
