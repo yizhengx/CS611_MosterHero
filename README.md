@@ -3,7 +3,7 @@
 
 #### 1. Class & Interface
 
-1. Moster
+1. Hero
 
    ```
    Attributes:
@@ -22,7 +22,19 @@
    attack()
    ```
 
-   
+2. Monster
+
+   ```
+   Attributes:
+   name
+   HP
+   level
+   damage 
+   defense
+   dodge_chance
+   ```
+
+3. 
 
 
 
@@ -34,8 +46,7 @@
 
   ```
   interface WeaponBehavior
-  attack()
-  
+  weaponAttack()
   
   ```
 
@@ -46,4 +57,12 @@
   
   ```
 
+- Factory Pattern
+
+  ```
+  interface MonsterCreater
   
+  ```
+
+  
+
