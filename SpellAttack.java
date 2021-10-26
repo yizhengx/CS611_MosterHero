@@ -1,3 +1,7 @@
-public interface SpellAttack extends Attackable{
-    void attack(Attackable obj);
+public class SpellAttack implements Attackable{
+    private Integer damage;
+
+    public void attack(CanBeAttacked obj){
+
+    }
 }

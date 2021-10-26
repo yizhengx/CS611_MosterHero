@@ -1,3 +1,3 @@
 public interface CanBeAttacked {
-    void receiveAttack(Integer damage, Integer damage_reduction, Integer defense_reduction, Integer dodge_reduction);
+    void receiveAttack(Integer damage, String attr_affected, Integer attr_reduction);
 }
