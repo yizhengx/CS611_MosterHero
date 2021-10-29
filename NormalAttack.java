@@ -1,14 +1,10 @@
 import java.util.*;
 
-public class SpellAttack implements AttackBehavior{
+public class NormalAttack implements AttackBehavior {
     private Integer damage;
-    private String attr_affected;
-    private Integer reduce;
 
-    SpellAttack(Integer damage_, String attr, Integer reduce_){
+    NormalAttack(Integer damage_){
         damage = damage_;
-        attr_affected = attr;
-        reduce = reduce_;
     }
 
     @Override
@@ -16,9 +12,7 @@ public class SpellAttack implements AttackBehavior{
         ArrayList<String> attr = new ArrayList<String>();
         ArrayList<Integer> reduces = new ArrayList<Integer>();
         attr.add("HP");
-        attr.add(attr_affected);
         reduces.add(damage);
-        reduces.add(reduce);
         obj.receiveAttack(attr, reduces);
     }
 

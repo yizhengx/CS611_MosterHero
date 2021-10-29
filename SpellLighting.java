@@ -1,11 +1,9 @@
-import java.util.ArrayList;
-
-public class SpellFire extends Spell {
-    // A fire spell, apart from the damage it causes it also reduces the defense of the enemy.
-    private String attr_affected = "defense";
+public class SpellLighting extends Spell {
+    // A lightning spell, apart from the damage it causes it also reduces the dodge chance of the enemy.
+    private String attr_affected = "dodge_chance";
     private Integer attr_reduction = 10;
 
-    SpellFire(){
+    SpellLighting(){
         super();
     }
 
