@@ -57,6 +57,16 @@ public abstract class Hero implements Attackable, CanBeAttacked{
     }
 
     public String toString(){
-        return "";
+        String message = "";
+        message += "name:"+name+"\n";
+        message += "HP:"+HP+"\n";
+        message += "mana:"+mana+"\n";
+        message += "strength:"+strength+"\n";
+        message += "agility:"+agility+"\n";
+        message += "dexterity:"+dexterity+"\n";
+        message += "money:"+money+"\n";
+        message += "exp:"+exp+"\n";
+        message += "level:"+level;
+        return message;
     }
 }

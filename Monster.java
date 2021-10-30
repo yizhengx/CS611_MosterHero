@@ -14,6 +14,16 @@ public class Monster implements Attackable, CanBeAttacked{
     private Integer dodge_chance;
     private NormalAttack attack_behavior;
 
+    Monster(String name_, String type_, Integer HP_, Integer level_, Integer damage_, Integer defense_, Integer dodge_chance_){
+        name = name_;
+        type = type_;
+        HP = HP_;
+        level = level_;
+        damage = damage_;
+        defense = defense_;
+        dodge_chance = dodge_chance_;
+    }
+
     @Override
     public void receiveAttack(ArrayList<String> attr_affected, ArrayList<Integer> attr_reduction) {
         // check if dodged

@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.*;
 
 public class LegendsGame {
@@ -9,7 +10,7 @@ public class LegendsGame {
     private ArrayList<Player> player_list =  new ArrayList<Player>();
     private Board board;
 
-    public void initialization(){
+    public void initialization() throws IOException{
         board = new Board();
         Integer num_players = IO.getInstance().validInteger("Please enter the number of players:", 1, 5);
         HashSet<Integer> used = board.getUsedSet();
@@ -26,9 +27,12 @@ public class LegendsGame {
         // System.out.print("\033[H\033[2J");
         // System.out.flush();
         System.out.println(board);
+        for (int i=0; i<player_list.size(); i++){
+            System.out.println(player_list.get(i));
+        }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         LegendsGame game = new LegendsGame();
         game.initialization();
     }

@@ -10,11 +10,12 @@ public class Player {
     private String icon;
     private Integer dead;
 
-    Player(String name_, Integer num_, String icon_){
+    Player(String name_, Integer num_, String icon_) throws IOException{
         name = name_;
         num = num_;
         icon = icon_;
         heros = new ArrayList<Hero>();
+        heroConfigure();
     }
 
     // Accessor
@@ -27,5 +28,13 @@ public class Player {
         }
     }
 
-    
+    public String toString(){
+        String message = "";
+        message += "+++++++++++++++++++++++++++++++++++++++++++";
+        for (int i=0; i<heros.size(); i++){
+            message += "\n"+heros.get(i);
+        }
+        message += "\n" + "+++++++++++++++++++++++++++++++++++++++++++";
+        return message;
+    }
 }
