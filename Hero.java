@@ -6,10 +6,10 @@ public abstract class Hero implements Attackable, CanBeAttacked{
     private String name;
     private Integer HP;
     private Integer mana;
-    private Integer strength;     // AAdded to the amount of damage they deal when using a weapon
-    private Integer agility;      // Increases their chance to dodge an incoming attack.
-    private Integer dexterity;    // Increases the amount of damage they deal when casting a spell
-    private Integer dodge_chance; // Determined by agility
+    protected Integer strength;     // AAdded to the amount of damage they deal when using a weapon
+    protected Integer agility;      // Increases their chance to dodge an incoming attack.
+    protected Integer dexterity;    // Increases the amount of damage they deal when casting a spell
+    protected Integer dodge_chance; // Determined by agility
     private Integer money;        // Money can used to buy item in the market or obtained from selling item in the market
     private Integer exp;          // 
     private Integer level;
