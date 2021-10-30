@@ -20,6 +20,10 @@ public abstract class Hero implements Attackable, CanBeAttacked{
     public Integer getMoney(){return money;}
     public Integer getExp(){return exp;}
     public Integer getLevel(){return level;}
+    public String getName(){return name;}
+
+    // Setter
+    public void setName(String name_){name = name_;}
 
     public void use(Useable obj){
         Map<String, Integer> attr_details = obj.beUsed();

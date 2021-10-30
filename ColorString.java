@@ -1,7 +1,7 @@
 /**
  * ColorTest
  */
-public class ColorTest {
+public class ColorString {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BLACK = "\u001B[30m";
     public static final String ANSI_RED = "\u001B[31m";
@@ -19,6 +19,14 @@ public class ColorTest {
     public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
     public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
     public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
+
+    public static String getColor(String prompt, String color){
+        if (color.equals("red")){return ANSI_RED+prompt+ANSI_RESET;}
+        if (color.equals("green")){return ANSI_GREEN+prompt+ANSI_RESET;}
+        if (color.equals("purple")){return ANSI_PURPLE+prompt+ANSI_RESET;}
+
+        return prompt;
+    }
 
     public static void main(String[] args) {
         System.out.println(ANSI_GREEN + "This text is red!" + ANSI_RESET);

@@ -1,6 +1,7 @@
 
 public class Weapon implements Attackable{
     // Name/cost/level/damage/required hands
+    private String protoType = "Weapon";
     private String name;
     private Integer cost;
     private Integer level; 
