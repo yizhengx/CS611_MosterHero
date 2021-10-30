@@ -14,6 +14,19 @@ public abstract class Hero implements Attackable, CanBeAttacked{
     private Integer exp;          // 
     private Integer level;
 
+    Hero(String name_, Integer mana_, Integer strength_, Integer agility_, Integer dexterity_, Integer money_, Integer exp_){
+        name = name_;
+        mana = mana_;
+        strength = strength_;
+        agility = agility_;
+        dexterity = dexterity_;
+        money = money_;
+        exp = exp_;
+        HP = 100;
+        level = 1;
+        dodge_chance = 0;
+    }
+
     // Accesser
     public Integer getHP(){return HP;}
     public Integer getMana(){return mana;}
@@ -41,5 +54,9 @@ public abstract class Hero implements Attackable, CanBeAttacked{
     public void attack(CanBeAttacked obj) {
         // TODO Auto-generated method stub
         
+    }
+
+    public String toString(){
+        return "";
     }
 }

@@ -1,4 +1,4 @@
-public class Armor implements Equitable{
+public class Armory implements Equitable{
     // Name/cost/required level/damage reduction
 
     @Override

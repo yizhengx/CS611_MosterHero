@@ -23,14 +23,21 @@ public class FileIO {
         return file_reader;
     }
 
-    public ArrayList<String> getFireSpell() throws IOException{
-        try (BufferedReader br = new BufferedReader(new FileReader(FireSpells_path))) {
+    public ArrayList<String> getWarriorsFile() throws IOException{return getFileContent(Warriors_path);}
+    public ArrayList<String> getSorcerersFile() throws IOException{return getFileContent(Sorcerers_path);}
+    public ArrayList<String> getPaladinsFile() throws IOException{return getFileContent(Paladins_path);}
+
+
+
+    public ArrayList<String> getFileContent(String path) throws IOException{
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             ArrayList<String> file_content = new ArrayList<String>();
             while ((line = br.readLine()) != null) {
                // process the line.
+               if (line.matches("[\\s]*")){continue;}
                file_content.add(line);
-               System.out.println(line);
+            //    System.out.println(line);
             }
             return file_content;
         }
@@ -38,6 +45,5 @@ public class FileIO {
 
     public static void main(String[] args) throws IOException {
         FileIO fio = FileIO.getInstance();
-        fio.getFireSpell();
     }
 }

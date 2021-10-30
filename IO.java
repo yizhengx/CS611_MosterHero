@@ -23,7 +23,10 @@ public class IO {
                 b = scan.nextInt();
                 if(b<start){System.out.println("Please input an integer larger than "+start+".");}
                 else if(b>end){System.out.println("Please input an integer smaller than "+end+".");}
-                else{break;}
+                else{
+                    scan.nextLine();
+                    break;
+                }
             }catch(Exception e){
                 System.out.println("Invalid input! Please input an Integer.");
                 b = scan.nextInt();
