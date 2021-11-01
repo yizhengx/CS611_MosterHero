@@ -59,7 +59,7 @@ public class IO {
                 if (s.length()!=1 || allowed.contains(s)==false){
                     System.out.println("Invalid input! Please input valid input.");
                 }
-                break;
+                else{break;}
             }
             catch(Exception e){
                 System.out.println("Invalid input! Please input a character.");

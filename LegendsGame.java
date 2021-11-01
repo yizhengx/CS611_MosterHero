@@ -14,17 +14,42 @@ public class LegendsGame {
         intro();
         initialization();
         while (true){
+            Player current_player = player_list.get(0);
             HashSet<String> options = new HashSet<String>();
-            options.add("w");
-            options.add("a");
-            options.add("s");
-            options.add("d");
-            String op = IO.getInstance().validSingleString("please enter your move:", options);
-            System.out.println(op);
+            String message = "";
+            if (current_player.getX()>0 && board.isAccessible(current_player.getX()-1, current_player.getY())==true){
+                options.add("w");
+                message += "\nw: move up";
+            }
+            if (current_player.getY()<board.getSize()-1){
+                options.add("d");
+                message += "\nd: move right";
+            }
+            if (current_player.getY()>0){
+                options.add("a");
+                message += "\na: move left";
+            }
+            if (current_player.getX()<board.getSize()-1){
+                options.add("s");
+                message += "\ns: move down";
+            }
+            options.add("q");
+            message += "\nq: quit";
+            options.add("i");
+            message += "\ni: check info";
+            String op = IO.getInstance().validSingleString(message+"\nplease enter your move:", options);
+            board.removePlayer(current_player.getX(), current_player.getY());
+            if (op.equals("w")){current_player.setX(current_player.getX()-1);}
+            if (op.equals("s")){current_player.setX(current_player.getX()+1);}
+            if (op.equals("a")){current_player.setY(current_player.getY()-1);}
+            if (op.equals("d")){current_player.setY(current_player.getY()+1);}
+            board.getPlayer(current_player.getX(), current_player.getY(), current_player.getIcon());
+            System.out.println(board);
+            if (board.getCell(current_player.getX(), current_player.getY()).hasMarket()){System.out.println(board.getCell(current_player.getX(), current_player.getY()).getMarket());}
         }
-        
     }
 
+    // 
     public void intro() throws IOException{
         System.out.println("Welcome to Legends!");
     }
@@ -38,7 +63,7 @@ public class LegendsGame {
             Player new_player = new Player(name_, num_, ""+(i+1));
             ArrayList<Integer> xy = board.getRandomCell();
             new_player.setX(xy.get(0));
-            new_player.setX(xy.get(1));
+            new_player.setY(xy.get(1));
             board.getPlayer(new_player.getX(), new_player.getY(), new_player.getIcon());
             player_list.add(new_player);
         }

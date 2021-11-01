@@ -35,7 +35,9 @@ public class Board {
     }
     public HashSet<Integer> getUsedSet(){return used;}
     public Integer getSize(){return size;}
-    public Cell getCell(Integer index){return board[index/size][index-size*(index/size)];}
+    // public Cell getCell(Integer index){return board[index/size][index-size*(index/size)];}
+    public Cell getCell(Integer x, Integer y){return board[x][y];}
+
 
     // set a common cell to a cell with player
     public void getPlayer(Integer x, Integer y, String icon){board[x][y].getPlayer(icon);}

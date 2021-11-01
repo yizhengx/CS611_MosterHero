@@ -15,6 +15,9 @@ public class Cell {
     }
 
     public boolean isAccessible(){return accessible==1;}
+    public boolean hasMarket(){return has_market==1;}
+    public Market getMarket(){return market;}
+
 
     // Setter
     public void removePlayer(){has_player=0;}
@@ -24,7 +27,10 @@ public class Cell {
     }
     public void removeUser(){has_player = 0;}
     public void setAccessible(Integer y){accessible=y;}
-    public void getMarket(){has_market=1;}
+    public void setMarket(){
+        has_market=1;
+        market = new Market();
+    }
 
     public String toString(){
         if (accessible==0){return ColorString.getColor("X", "red");}
