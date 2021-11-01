@@ -14,12 +14,15 @@ public class Cell {
         has_player = p_;
     }
 
+    public boolean isAccessible(){return accessible==1;}
+
     // Setter
     public void removePlayer(){has_player=0;}
     public void getPlayer(String icon){
         has_player = 1;
         player_icon = icon;
     }
+    public void removeUser(){has_player = 0;}
     public void setAccessible(Integer y){accessible=y;}
     public void getMarket(){has_market=1;}
 

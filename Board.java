@@ -6,32 +6,10 @@ public class Board {
     private Integer size = 8;
     HashSet<Integer> used;
 
-    Board(){
-        board = new Cell[8][8];
-        // random assign 12 non-accessible cells, 19 markets and 33 common cells
-        for (int i=0; i<size; i++){
-            for (int j=0; j<size; j++){
-                board[i][j] = new Cell(1, 0, 0);
-            }
-        }
-        used = new HashSet<Integer>();
-        // create instance of Random class
-        Random rand = new Random();
-        for (int i=0; i<=6; i++){
-            int index = rand.nextInt(64);
-            while(used.contains(index)){index = rand.nextInt(64);}
-            board[index/8][index-8*(index/8)].setAccessible(0);
-            used.add(index);
-        }
-        for (int i=0; i<=10; i++){
-            int index = rand.nextInt(64);
-            while(used.contains(index)){index = rand.nextInt(64);}
-            board[index/8][index-8*(index/8)].getMarket();
-            used.add(index);
-        }
-    }
+    Board(){initialization(8);}
+    Board(Integer size_){initialization(size_);}
 
-    Board(Integer size_){
+    public void initialization(Integer size_){
         size = size_;
         board = new Cell[size][size];
         for (int i=0; i<size; i++){
@@ -55,10 +33,29 @@ public class Board {
             used.add(index);
         }
     }
-
     public HashSet<Integer> getUsedSet(){return used;}
     public Integer getSize(){return size;}
     public Cell getCell(Integer index){return board[index/size][index-size*(index/size)];}
+
+    // set a common cell to a cell with player
+    public void getPlayer(Integer x, Integer y, String icon){board[x][y].getPlayer(icon);}
+
+    // set a cell with player to a cell without player
+    public void removePlayer(Integer x, Integer y){board[x][y].removeUser();}
+
+    // check if a cell is accessible -> T for accessible & F for non-accessible
+    public boolean isAccessible(Integer x, Integer y){return board[x][y].isAccessible();}
+
+    // return [x,y] for a random common cell
+    public ArrayList<Integer> getRandomCell(){
+        Random rand = new Random();
+        ArrayList<Integer> xy = new ArrayList<Integer>();
+        int index = rand.nextInt(size*size);
+        while(used.contains(index)){index = rand.nextInt(size*size);}
+        xy.add(index/size);
+        xy.add(index-size*(index/size));
+        return xy;
+    }
 
     public String toString(){
         String board_out = "";

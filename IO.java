@@ -49,7 +49,24 @@ public class IO {
         }
         return s;
     } 
-    
+
+    public String validSingleString(String prompt, HashSet<String> allowed){
+        System.out.println(prompt);
+        String s = "";
+        while(true){
+            try{
+                s = scan.nextLine();
+                if (s.length()!=1 || allowed.contains(s)==false){
+                    System.out.println("Invalid input! Please input valid input.");
+                }
+                break;
+            }
+            catch(Exception e){
+                System.out.println("Invalid input! Please input a character.");
+            }
+        }
+        return s;
+    } 
 
     public static void main(String[] args) {
         IO io = IO.getInstance();

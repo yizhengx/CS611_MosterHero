@@ -21,6 +21,12 @@ public class Player {
     // Accessor
     public String getName(){return name;}
     public String getIcon(){return icon;}
+    public Integer getX(){return x;}
+    public Integer getY(){return y;}
+
+    // Setter
+    public void setX(Integer x_){x = x_;}
+    public void setY(Integer y_){y = y_;}
 
     public void heroConfigure() throws IOException{
         for (int i=0; i<num; i++){

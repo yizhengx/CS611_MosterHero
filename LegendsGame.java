@@ -10,30 +10,43 @@ public class LegendsGame {
     private ArrayList<Player> player_list =  new ArrayList<Player>();
     private Board board;
 
+    public void run() throws IOException{
+        intro();
+        initialization();
+        while (true){
+            HashSet<String> options = new HashSet<String>();
+            options.add("w");
+            options.add("a");
+            options.add("s");
+            options.add("d");
+            String op = IO.getInstance().validSingleString("please enter your move:", options);
+            System.out.println(op);
+        }
+        
+    }
+
+    public void intro() throws IOException{
+        System.out.println("Welcome to Legends!");
+    }
+
     public void initialization() throws IOException{
         board = new Board();
         Integer num_players = IO.getInstance().validInteger("Please enter the number of players:", 1, 5);
-        HashSet<Integer> used = board.getUsedSet();
-        Random rand = new Random();
         for (int i=0; i<num_players;i++){
             String name_ = IO.getInstance().validString("Please enter the name for player "+(i+1));
             Integer num_ = IO.getInstance().validInteger("Please enter the number of heros for player "+(i+1), 1, 3);
             Player new_player = new Player(name_, num_, ""+(i+1));
+            ArrayList<Integer> xy = board.getRandomCell();
+            new_player.setX(xy.get(0));
+            new_player.setX(xy.get(1));
+            board.getPlayer(new_player.getX(), new_player.getY(), new_player.getIcon());
             player_list.add(new_player);
-            Integer randint = rand.nextInt(board.getSize()*board.getSize());
-            while (used.contains(randint)){randint = rand.nextInt(board.getSize()*board.getSize());}
-            board.getCell(randint).getPlayer(""+(i+1));
         }
-        // System.out.print("\033[H\033[2J");
-        // System.out.flush();
         System.out.println(board);
-        for (int i=0; i<player_list.size(); i++){
-            System.out.println(player_list.get(i));
-        }
     }
 
     public static void main(String[] args) throws IOException {
         LegendsGame game = new LegendsGame();
-        game.initialization();
+        game.run();
     }
 }
