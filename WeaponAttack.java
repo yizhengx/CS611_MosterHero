@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class WeaponAttack implements Attackable {
+public class WeaponAttack implements AttackBehavior {
     private Integer base_damage;
     private Integer added_damage;
 
@@ -16,5 +16,11 @@ public class WeaponAttack implements Attackable {
         attr.add("HP");
         reduces.add(base_damage+added_damage);
         obj.receiveAttack(attr, reduces);
+    }
+
+    @Override
+    public void setBaseDamage(Integer damage_) {
+        // TODO Auto-generated method stub
+        
     }
 }

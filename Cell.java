@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 /**
  * Cell
  */
@@ -16,7 +18,9 @@ public class Cell {
 
     public boolean isAccessible(){return accessible==1;}
     public boolean hasMarket(){return has_market==1;}
-    public Market getMarket(){return market;}
+    public Market getMarket(){
+        market.print();
+        return market;}
 
 
     // Setter
@@ -27,7 +31,7 @@ public class Cell {
     }
     public void removeUser(){has_player = 0;}
     public void setAccessible(Integer y){accessible=y;}
-    public void setMarket(){
+    public void setMarket() throws IOException{
         has_market=1;
         market = new Market();
     }

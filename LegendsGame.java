@@ -14,9 +14,17 @@ public class LegendsGame {
         intro();
         initialization();
         while (true){
+            
             Player current_player = player_list.get(0);
+            System.out.println(board);
+            
             HashSet<String> options = new HashSet<String>();
             String message = "";
+            if (board.getCell(current_player.getX(), current_player.getY()).hasMarket()){
+                options.add("m");
+                message += "\nm: enter the market";
+                // System.out.println(board.getCell(current_player.getX(), current_player.getY()).getMarket());
+            }
             if (current_player.getX()>0 && board.isAccessible(current_player.getX()-1, current_player.getY())==true){
                 options.add("w");
                 message += "\nw: move up";
@@ -43,10 +51,14 @@ public class LegendsGame {
             if (op.equals("s")){current_player.setX(current_player.getX()+1);}
             if (op.equals("a")){current_player.setY(current_player.getY()-1);}
             if (op.equals("d")){current_player.setY(current_player.getY()+1);}
+            if (op.equals("m")){enter_market(current_player, board.getCell(current_player.getX(), current_player.getY()));}
             board.getPlayer(current_player.getX(), current_player.getY(), current_player.getIcon());
-            System.out.println(board);
-            if (board.getCell(current_player.getX(), current_player.getY()).hasMarket()){System.out.println(board.getCell(current_player.getX(), current_player.getY()).getMarket());}
         }
+    }
+
+    public void enter_market(Player p, Cell c){
+        c.getMarket();
+        // choose hero for operations or quit()
     }
 
     // 
@@ -67,7 +79,6 @@ public class LegendsGame {
             board.getPlayer(new_player.getX(), new_player.getY(), new_player.getIcon());
             player_list.add(new_player);
         }
-        System.out.println(board);
     }
 
     public static void main(String[] args) throws IOException {

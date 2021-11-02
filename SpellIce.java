@@ -3,8 +3,8 @@ public class SpellIce extends Spell{
     private String attr_affected = "damage";
     private Integer attr_reduction = 10;
 
-    SpellIce(){
-        super();
+    SpellIce(String name_, Integer cost_, Integer level_, Integer damage_, Integer mana_cost_){
+        super(name_, cost_, level_, damage_, mana_cost_);
     }
 
     @Override

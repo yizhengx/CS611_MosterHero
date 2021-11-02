@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.*;
 
 public class Board {
@@ -6,10 +7,10 @@ public class Board {
     private Integer size = 8;
     HashSet<Integer> used;
 
-    Board(){initialization(8);}
-    Board(Integer size_){initialization(size_);}
+    Board() throws IOException{initialization(8);}
+    Board(Integer size_) throws IOException{initialization(size_);}
 
-    public void initialization(Integer size_){
+    public void initialization(Integer size_) throws IOException{
         size = size_;
         board = new Cell[size][size];
         for (int i=0; i<size; i++){
@@ -29,7 +30,7 @@ public class Board {
         for (int i=0; i<=10; i++){
             int index = rand.nextInt(size*size);
             while(used.contains(index)){index = rand.nextInt(size*size);}
-            board[index/size][index-size*(index/size)].getMarket();
+            board[index/size][index-size*(index/size)].setMarket();
             used.add(index);
         }
     }
@@ -76,7 +77,7 @@ public class Board {
         return board_out;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Board board = new Board();
         System.out.println(board);
     }

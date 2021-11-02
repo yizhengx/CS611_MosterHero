@@ -6,8 +6,8 @@ public class SpellFire extends Spell {
     private String attr_affected = "defense";
     private Integer attr_reduction = 10;
 
-    SpellFire(){
-        super();
+    SpellFire(String name_, Integer cost_, Integer level_, Integer damage_, Integer mana_cost_){
+        super(name_, cost_, level_, damage_, mana_cost_);
     }
 
     // 
@@ -19,6 +19,5 @@ public class SpellFire extends Spell {
     }
 
     public static void main(String[] args) {
-        SpellFire sf = new SpellFire();
     }
 }

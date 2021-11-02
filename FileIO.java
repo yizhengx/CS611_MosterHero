@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class FileIO {
     private final String FireSpells_path = "FireSpells.txt";
-    private final String IceSpells_spell_path = "IceSpells.txt";
+    private final String IceSpells_path = "IceSpells.txt";
     private final String LightningSpells_path = "LightningSpells.txt";
     private final String Sorcerers_path = "Sorcerers.txt";
     private final String Warriors_path = "Warriors.txt";
@@ -23,11 +23,19 @@ public class FileIO {
         return file_reader;
     }
 
+    
+    public ArrayList<String> getFireSpellsFile() throws IOException{return getFileContent(FireSpells_path);}
+    public ArrayList<String> getIceSpellsFile() throws IOException{return getFileContent(IceSpells_path);}
+    public ArrayList<String> getLightningSpellsFile() throws IOException{return getFileContent(LightningSpells_path);}
     public ArrayList<String> getWarriorsFile() throws IOException{return getFileContent(Warriors_path);}
     public ArrayList<String> getSorcerersFile() throws IOException{return getFileContent(Sorcerers_path);}
     public ArrayList<String> getPaladinsFile() throws IOException{return getFileContent(Paladins_path);}
-
-
+    public ArrayList<String> getSpiritsFile() throws IOException{return getFileContent(Spirits_path);}
+    public ArrayList<String> getDragonsFile() throws IOException{return getFileContent(Dragons_path);}
+    public ArrayList<String> getExoskeletonsFile() throws IOException{return getFileContent(Exoskeletons_path);}
+    public ArrayList<String> getArmoryFile() throws IOException{return getFileContent(Armory_path);}
+    public ArrayList<String> getWeaponryFile() throws IOException{return getFileContent(Weaponry_path);}
+    public ArrayList<String> getPotionsFile() throws IOException{return getFileContent(Potions_path);}
 
     public ArrayList<String> getFileContent(String path) throws IOException{
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {

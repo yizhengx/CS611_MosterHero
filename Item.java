@@ -4,5 +4,9 @@ public class Item {
     private Integer level;
 
     // Accessor
-
+    Item(String name_, Integer cost_, Integer level_){
+        name = name_;
+        cost = cost_;
+        level = level_;
+    }
 }
