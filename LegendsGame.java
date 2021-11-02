@@ -57,9 +57,35 @@ public class LegendsGame {
     }
 
     public void enter_market(Player p, Cell c){
+        System.out.println("Welcom to market");
         c.getMarket();
+        HashSet<String> options = new HashSet<String>();
+        String message = "Please select your hero to make buy/sell operations: ";
         // choose hero for operations or quit()
+        for (int i=0; i<p.getNumHeros(); i++){
+            options.add(""+(i+1));
+            message += "\n1. "+p.getHero(i).getName();
+        }
+        options.add("q");
+        message += "\nq: quit the market.";
+        String op = IO.getInstance().validSingleString(message, options);
+        if (!op.equals("q")){
+            for (int i=0; i<p.getNumHeros(); i++){
+                if (op.equals(""+(i+1))){
+                    buy_sell(p.getHero(i), c);
+                    break;
+                }
+            }
+            enter_market(p,c);
+        }
     }
+
+    public void buy_sell(Hero hero, Cell c){
+        
+
+    }
+
+    public void fight(Player p){}
 
     // 
     public void intro() throws IOException{

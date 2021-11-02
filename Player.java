@@ -23,6 +23,8 @@ public class Player {
     public String getIcon(){return icon;}
     public Integer getX(){return x;}
     public Integer getY(){return y;}
+    public Integer getNumHeros(){return heros.size();}
+    public Hero getHero(Integer index){return heros.get(index);}
 
     // Setter
     public void setX(Integer x_){x = x_;}

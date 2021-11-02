@@ -1,6 +1,5 @@
-import java.net.Inet4Address;
 
-public class Weapon implements Attackable{
+public class Weapon extends Item implements Attackable{
     // Name/cost/level/damage/required hands
     private String protoType = "Weapon";
     private String name;
@@ -12,17 +11,12 @@ public class Weapon implements Attackable{
     private Integer base_damage;
 
     Weapon(String name_, Integer cost_, Integer level_, Integer damage_, Integer required_hands_){
+        super(name_, cost_, level_, "Weapon");
         name = name_;
         cost = cost_;
         level = level_;
         damage = damage_;
         required_hands = required_hands_;
-    }
-
-
-    public String toString(){
-        String message = "" + "name: " + name +"\ncost: "+cost+"\nlevel: "+level;
-        return message;
     }
 
 

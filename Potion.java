@@ -1,7 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
 
-public class Potion implements Useable{
+public class Potion extends Item implements Useable{
     // Name/cost/required level/attribute increase/attribute affected
     private String name;
     private Integer cost;
@@ -10,16 +10,9 @@ public class Potion implements Useable{
     private Integer attr_increse;
 
     Potion(String name_, Integer cost_, Integer required_level_, Integer attr_increse_, String attr_affected_){
-        name = name_;
-        cost = cost_;
-        required_level = required_level_;
+        super(name_, cost_, required_level_, "Potion");
         attr_affected = attr_affected_;
         attr_increse = attr_increse_;
-    }
-
-    public String toString(){
-        String message = "" + "name: " + name +"\ncost: "+cost+"\nlevel: "+required_level;
-        return message;
     }
 
     @Override
