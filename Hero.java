@@ -13,6 +13,10 @@ public abstract class Hero implements Attackable, CanBeAttacked{
     private Integer money;        // Money can used to buy item in the market or obtained from selling item in the market
     private Integer exp;          // 
     private Integer level;
+    private ArrayList<Item> items;
+    private ArrayList<Attackable> attack_tools;
+    private ArrayList<Useable> useables_tools;
+    
 
     Hero(String name_, Integer mana_, Integer strength_, Integer agility_, Integer dexterity_, Integer money_, Integer exp_){
         name = name_;

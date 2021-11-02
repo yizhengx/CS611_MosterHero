@@ -72,6 +72,7 @@ public class LegendsGame {
         if (!op.equals("q")){
             for (int i=0; i<p.getNumHeros(); i++){
                 if (op.equals(""+(i+1))){
+                    System.out.println("Now comes to " + p.getHero(i).getName() + " to sell/something");
                     buy_sell(p.getHero(i), c);
                     break;
                 }
@@ -81,7 +82,23 @@ public class LegendsGame {
     }
 
     public void buy_sell(Hero hero, Cell c){
-        
+        System.out.println(hero);
+        HashSet<String> options = new HashSet<String>();
+        String message = "b: buy an item from the market\nn: sell an item from hero"
+            +"\nq: finish buy/sell opertion for this hero\nPlease enter your choice:";
+        options.add("b");
+        options.add("q");
+        options.add("n");
+        String op = IO.getInstance().validSingleString(message, options);
+        while (!op.equals("q")){
+            if (op.equals("b")){
+                // determine buy which one
+                // if it is allowed -> buy
+                // not -> print not allowed
+            }else{
+                // get the item to sell
+            }
+        }  
 
     }
 
