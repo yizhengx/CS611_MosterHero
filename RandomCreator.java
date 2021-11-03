@@ -72,9 +72,30 @@ public class RandomCreator implements Factory{
     }
 
     @Override
-    public Monster createMoster(String info) {
-        // TODO Auto-generated method stub
-        return null;
+    public Monster createMoster(String info) throws IOException {
+        Random rand = new Random();
+        ArrayList<String> d_lines = FileIO.getInstance().getDragonsFile();
+        ArrayList<String> e_lines = FileIO.getInstance().getExoskeletonsFile();
+        ArrayList<String> s_lines = FileIO.getInstance().getSpiritsFile();
+        // ArrayList<String> hero_lines = new ArrayList<String>();
+        // for (int i=0; i<warriors_lines.size();i++){hero_lines.add(warriors_lines.get(i));}
+        // for (int i=0; i<sorcerers_lines.size();i++){hero_lines.add(sorcerers_lines.get(i));}
+        // for (int i=0; i<paladins_lines.size();i++){hero_lines.add(paladins_lines.get(i));}
+        // Name/level/damage/defense/dodge chance
+        Integer index = rand.nextInt(d_lines.size()+e_lines.size()+s_lines.size())+1;
+        if (index>(d_lines.size()+e_lines.size())){
+            String[] specs = s_lines.get(index-d_lines.size()-e_lines.size()-1).split("\\s+");
+            Monster new_moster = new Monster(specs[0], Integer.parseInt(specs[1]), Integer.parseInt(specs[2]), Integer.parseInt(specs[3]), Integer.parseInt(specs[4]), "Spirit");
+            return new_moster;
+        }else if(index>d_lines.size()){
+            String[] specs = e_lines.get(index-d_lines.size()-1).split("\\s+");
+            Monster new_moster = new Monster(specs[0], Integer.parseInt(specs[1]), Integer.parseInt(specs[2]), Integer.parseInt(specs[3]), Integer.parseInt(specs[4]), "Exoskeleton");
+            return new_moster;
+        }else{
+            String[] specs = d_lines.get(index-1).split("\\s+");
+            Monster new_moster = new Monster(specs[0], Integer.parseInt(specs[1]), Integer.parseInt(specs[2]), Integer.parseInt(specs[3]), Integer.parseInt(specs[4]), "Dragon");
+            return new_moster;
+        }
     }
 
     @Override
@@ -142,12 +163,14 @@ public class RandomCreator implements Factory{
     }
 
     public static void main(String[] args) throws IOException {
-        // RandomCreator rc = RandomCreator.getInstance();
+        RandomCreator rc = RandomCreator.getInstance();
         // Hero h = rc.createHero("");
         // System.out.println(h.getName());
+        Monster m = rc.createMoster("");
+        System.out.println(m);
 
-        String s = "ss        tab";
-        String[] specs = s.split("\\s+");
-        for (int i=0; i<2; i++){System.out.println(specs[i]);}
+        // String s = "ss        tab";
+        // String[] specs = s.split("\\s+");
+        // for (int i=0; i<2; i++){System.out.println(specs[i]);}
     }
 }

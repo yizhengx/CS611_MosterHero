@@ -50,7 +50,12 @@ public abstract class Hero implements Attackable, CanBeAttacked{
     public void setName(String name_){name = name_;}
 
     // receive Item from a market
-    public void recieveItem(Item obj){items.add(obj);}
+    public void recieveItem(Item obj){
+        items.add(obj);
+        if (obj.getAttackable()==1){receiveAttackable((Attackable) obj);}
+        if (obj.getEquitable()==1){recieveEquitable((Equitable) obj);}
+        if (obj.getUseable()==1){recieveUseable((Useable)obj);}
+    }
     public void receiveAttackable(Attackable obj){attack_tools.add(obj);}
     public void recieveEquitable(Equitable obj){equitable_tools.add(obj);}
     public void recieveUseable(Useable obj){useables_tools.add(obj);}
@@ -141,11 +146,24 @@ public abstract class Hero implements Attackable, CanBeAttacked{
             options.add(""+(i+3));
             }
         }
+        else{
+            for (int i=0; i<attack_tools.size();i++){
+                message += "\n"+(i+2)+". Attack with Magic Spell "+((Spell) attack_tools.get(i)).getName() + 
+                    " [" + ((Spell) attack_tools.get(i)).getAffectedAttr() + ": " + ((Spell) attack_tools.get(i)).getAffectedRed();
+            options.add(""+(i+2));
+            }
+        }
         String op = IO.getInstance().validString(message, options);
         if (op.equals("1")){attack(obj);}
-        if (op.equals("2") && equipped_weapon!=null){
-            equipped_weapon.setBaseDamage(strength);
-            equipped_weapon.attack(obj);
+        else if (equipped_weapon!=null){
+            if (op.equals("2")){
+                equipped_weapon.setBaseDamage(strength);
+                equipped_weapon.attack(obj);
+            }
+            else{
+                Integer index = Integer.parseInt(op)-2;
+                attack_tools.get(index).attack(obj);
+            }
         }else{
             Integer index = Integer.parseInt(op)-1;
             attack_tools.get(index).attack(obj);

@@ -115,9 +115,6 @@ public class LegendsGame {
                     if (hero.getMoney()>=item.getCost() && hero.getLevel()>=item.getLevel()){
                         // buy
                         hero.recieveItem(item);
-                        if (item.getAttackable()==1){hero.receiveAttackable((Attackable) item);}
-                        if (item.getEquitable()==1){hero.recieveEquitable((Equitable) item);}
-                        if (item.getUseable()==1){hero.recieveUseable((Useable)item);}
                     }
                     else{System.out.println("You are not allowed to own thest item. Please check your money and level.");}
                     op = IO.getInstance().validString(message_, options_);
@@ -163,27 +160,40 @@ public class LegendsGame {
         }  
     }
 
-    public void fight(Player p){
+    public void fight(Player p) throws IOException{
         ArrayList<Hero> heros = p.getHeros();
         System.out.println("Oops!!! Monsters here! You encounter "+ heros.size()+ " monsters.");
         Monster m = RandomCreator.getInstance().createMoster("");
         System.out.println(m);
         String message = "Now you have following heros to fight: ";
         HashSet<String> options = new HashSet<String>();
-        for (int i=0; i<=heros.size();i++){
-            if (p.getHero(i).getHP()>0){
+        for (int i=0; i<heros.size();i++){
+            if (heros.get(i).getHP()>0){
                 options.add(""+(i+1));
-                message += "\n"+(i+1)+": "+p.getHero(i).getName();
+                message += "\n"+(i+1)+": "+heros.get(i).getName();
             }
         }
         message+="\n Please choose a hero to fight with the coming monster: ";
         String op = IO.getInstance().validString(message, options);
-        openFire(heros.get(Integer.parseInt(op)), m);
+        openFire(heros.get(Integer.parseInt(op)-1), m);
     }
 
     // open fire between a hero and a moster: if the moster is dead, return 1, else return 0
     public Integer openFire(Hero h, Monster m){
         System.out.println("open fire");
+        Integer turn = 1;
+        while (h.getHP()>0 && m.getDefense()>0){
+            if (turn==1){
+                // Hero's turn
+                h.chooseAttack(m);
+                turn = 0;
+            }
+            else{
+                m.attack(h);
+                turn = 1;
+            }
+        }
+        
         return 0;
     }
 
@@ -209,6 +219,6 @@ public class LegendsGame {
 
     public static void main(String[] args) throws IOException {
         LegendsGame game = new LegendsGame();
-        game.initialization();
+        game.run();
     }
 }

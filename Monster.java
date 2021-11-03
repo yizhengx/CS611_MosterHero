@@ -14,7 +14,8 @@ public class Monster implements Attackable, CanBeAttacked{
     private Integer dodge_chance;
     private NormalAttack attack_behavior;
 
-    Monster(String name_, String type_, Integer level_, Integer damage_, Integer defense_, Integer dodge_chance_){
+    // Name/level/damage/defense/dodge chance
+    Monster(String name_, Integer level_, Integer damage_, Integer defense_, Integer dodge_chance_, String type_){
         name = name_;
         type = type_;
         level = level_;
@@ -22,6 +23,12 @@ public class Monster implements Attackable, CanBeAttacked{
         defense = defense_;
         dodge_chance = dodge_chance_;
     }
+
+    public Monster(String string, int parseInt, int parseInt2, int parseInt3, int parseInt4, int parseInt5,
+            int parseInt6) {
+    }
+
+    public Integer getDefense(){return defense;}
 
     @Override
     public void receiveAttack(ArrayList<String> attr_affected, ArrayList<Integer> attr_reduction) {
@@ -49,7 +56,7 @@ public class Monster implements Attackable, CanBeAttacked{
     }
 
     public String toString() {
-        String message = "[Monster] Name: "+name+" Level: "+level;
+        String message = "[Monster] Name: "+name+" Level: "+level + " Defense: " + defense;
         return message;
     }
 
@@ -63,4 +70,6 @@ public class Monster implements Attackable, CanBeAttacked{
     @Override
     public void setBaseDamage(Integer base_damage_) {}
     
+    public static void main(String[] args) {
+    }
 }
