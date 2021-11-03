@@ -183,6 +183,7 @@ public class LegendsGame {
 
     // open fire between a hero and a moster: if the moster is dead, return 1, else return 0
     public Integer openFire(Hero h, Monster m){
+        System.out.println("open fire");
         return 0;
     }
 
@@ -208,6 +209,6 @@ public class LegendsGame {
 
     public static void main(String[] args) throws IOException {
         LegendsGame game = new LegendsGame();
-        game.run();
+        game.initialization();
     }
 }

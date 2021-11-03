@@ -7,7 +7,7 @@ public class Board {
     private Integer size = 8;
     HashSet<Integer> used;
 
-    Board() throws IOException{initialization(8);}
+    Board()throws IOException{initialization(8);}
     Board(Integer size_) throws IOException{initialization(size_);}
 
     public void initialization(Integer size_) throws IOException{
