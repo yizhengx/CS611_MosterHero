@@ -19,8 +19,9 @@ public class Cell {
     public boolean isAccessible(){return accessible==1;}
     public boolean hasMarket(){return has_market==1;}
     public Market getMarket(){
-        market.print();
-        return market;}
+        // market.print();
+        return market;
+    }
 
 
     // Setter

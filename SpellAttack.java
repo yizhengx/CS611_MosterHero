@@ -21,11 +21,4 @@ public class SpellAttack implements AttackBehavior{
         reduces.add(reduce);
         obj.receiveAttack(attr, reduces);
     }
-
-    @Override
-    public void setBaseDamage(Integer damage_) {
-        // TODO Auto-generated method stub
-    }
-
-
 }

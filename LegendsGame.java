@@ -14,10 +14,8 @@ public class LegendsGame {
         intro();
         initialization();
         while (true){
-            
             Player current_player = player_list.get(0);
             System.out.println(board);
-            
             HashSet<String> options = new HashSet<String>();
             String message = "";
             if (board.getCell(current_player.getX(), current_player.getY()).hasMarket()){
@@ -29,15 +27,15 @@ public class LegendsGame {
                 options.add("w");
                 message += "\nw: move up";
             }
-            if (current_player.getY()<board.getSize()-1){
+            if (current_player.getY()<board.getSize()-1 && board.isAccessible(current_player.getX(), current_player.getY()+1)==true){
                 options.add("d");
                 message += "\nd: move right";
             }
-            if (current_player.getY()>0){
+            if (current_player.getY()>0 && board.isAccessible(current_player.getX(), current_player.getY()-1)==true){
                 options.add("a");
                 message += "\na: move left";
             }
-            if (current_player.getX()<board.getSize()-1){
+            if (current_player.getX()<board.getSize()-1 && board.isAccessible(current_player.getX()+1, current_player.getY())==true){
                 options.add("s");
                 message += "\ns: move down";
             }
@@ -45,30 +43,39 @@ public class LegendsGame {
             message += "\nq: quit";
             options.add("i");
             message += "\ni: check info";
-            String op = IO.getInstance().validSingleString(message+"\nplease enter your move:", options);
+            String op = IO.getInstance().validString(message+"\nplease enter your move:", options);
             board.removePlayer(current_player.getX(), current_player.getY());
-            if (op.equals("w")){current_player.setX(current_player.getX()-1);}
-            if (op.equals("s")){current_player.setX(current_player.getX()+1);}
-            if (op.equals("a")){current_player.setY(current_player.getY()-1);}
-            if (op.equals("d")){current_player.setY(current_player.getY()+1);}
             if (op.equals("m")){enter_market(current_player, board.getCell(current_player.getX(), current_player.getY()));}
+            else{
+                if (op.equals("w")){current_player.setX(current_player.getX()-1);}
+                if (op.equals("s")){current_player.setX(current_player.getX()+1);}
+                if (op.equals("a")){current_player.setY(current_player.getY()-1);}
+                if (op.equals("d")){current_player.setY(current_player.getY()+1);}
+                if (board.getCell(current_player.getX(), current_player.getY()).hasMarket()==false){
+                    // determine fight or not
+                    Random rand = new Random();
+                    Integer randint = rand.nextInt(10);
+                    if (randint<=4){fight(current_player);}
+                }
+            }
             board.getPlayer(current_player.getX(), current_player.getY(), current_player.getIcon());
         }
     }
 
     public void enter_market(Player p, Cell c){
         System.out.println("Welcom to market");
-        c.getMarket();
+        c.getMarket().print();;
         HashSet<String> options = new HashSet<String>();
-        String message = "Please select your hero to make buy/sell operations: ";
+        String message = "Here are the heros in your team:";
         // choose hero for operations or quit()
         for (int i=0; i<p.getNumHeros(); i++){
             options.add(""+(i+1));
-            message += "\n1. "+p.getHero(i).getName();
+            message += "\n"+(i+1)+". "+p.getHero(i).getName();
         }
+        message += "\nPlease select your hero to make buy/sell operations: ";
         options.add("q");
         message += "\nq: quit the market.";
-        String op = IO.getInstance().validSingleString(message, options);
+        String op = IO.getInstance().validString(message, options);
         if (!op.equals("q")){
             for (int i=0; i<p.getNumHeros(); i++){
                 if (op.equals(""+(i+1))){
@@ -82,29 +89,104 @@ public class LegendsGame {
     }
 
     public void buy_sell(Hero hero, Cell c){
-        System.out.println(hero);
+        // System.out.println(hero);
         HashSet<String> options = new HashSet<String>();
         String message = "b: buy an item from the market\nn: sell an item from hero"
             +"\nq: finish buy/sell opertion for this hero\nPlease enter your choice:";
         options.add("b");
         options.add("q");
         options.add("n");
-        String op = IO.getInstance().validSingleString(message, options);
+        String op = IO.getInstance().validString(message, options);
         while (!op.equals("q")){
             if (op.equals("b")){
                 // determine buy which one
                 // if it is allowed -> buy
                 // not -> print not allowed
+                ArrayList<Item> items = c.getMarket().getItems();
+                System.out.println("Here are the items you can buy.");
+                c.getMarket().print();
+                HashSet<String> options_ = new HashSet<String>();
+                String message_ = "Please choose item you wanna buy (or q for quit): ";
+                for (int i=0; i<items.size(); i++){options_.add(""+(i+1));}
+                options_.add("q");
+                op = IO.getInstance().validString(message_, options_);
+                while (!op.equals("q")){
+                    Item item = items.get(Integer.parseInt(op)-1);
+                    if (hero.getMoney()>=item.getCost() && hero.getLevel()>=item.getLevel()){
+                        // buy
+                        hero.recieveItem(item);
+                        if (item.getAttackable()==1){hero.receiveAttackable((Attackable) item);}
+                        if (item.getEquitable()==1){hero.recieveEquitable((Equitable) item);}
+                        if (item.getUseable()==1){hero.recieveUseable((Useable)item);}
+                    }
+                    else{System.out.println("You are not allowed to own thest item. Please check your money and level.");}
+                    op = IO.getInstance().validString(message_, options_);
+                }
+                // buy_sell(hero, c);
             }else{
                 // get the item to sell
+                if (hero.getItems().size()==0){
+                    System.out.println("You have no item to sell.");
+                }else{
+                    HashSet<String> options_ = new HashSet<String>();
+                    System.out.println("here are items you have");
+                    for (int i=0; i<hero.getItems().size(); i++){
+                        System.out.println((i+1)+": "+hero.getItems().get(i));
+                        options_.add(""+(i+1));
+                    }
+                    options_.add("q");
+                    String message_ = "Please choose item you wanna sell (or q for quit): ";
+                    String op_ = IO.getInstance().validString(message_, options_);
+                    while (!op_.equals("q")){
+                        Item item = hero.getItems().get(Integer.parseInt(op_)-1);
+                        hero.removeItem(item);
+                        System.out.println("You successfully sell item "+item.getName()+" for a price of "+item.getCost()/2+".");
+                        if (hero.getItems().size()==0){
+                            System.out.println("You have no item to sell.");
+                            break;
+                        }
+                        else{
+                            System.out.println("here are items you have");
+                            options_.clear();
+                            for (int i=0; i<hero.getItems().size(); i++){
+                                System.out.println((i+1)+": "+hero.getItems().get(i));
+                                options_.add(""+(i+1));
+                            }
+                            options_.add("q");
+                            message_ = "Please choose item you wanna sell (or q for quit): ";
+                            op_ = IO.getInstance().validString(message_, options_);
+                        }
+                    }
+                }
             }
+            op = IO.getInstance().validString(message, options);
         }  
-
     }
 
-    public void fight(Player p){}
+    public void fight(Player p){
+        ArrayList<Hero> heros = p.getHeros();
+        System.out.println("Oops!!! Monsters here! You encounter "+ heros.size()+ " monsters.");
+        Monster m = RandomCreator.getInstance().createMoster("");
+        System.out.println(m);
+        String message = "Now you have following heros to fight: ";
+        HashSet<String> options = new HashSet<String>();
+        for (int i=0; i<=heros.size();i++){
+            if (p.getHero(i).getHP()>0){
+                options.add(""+(i+1));
+                message += "\n"+(i+1)+": "+p.getHero(i).getName();
+            }
+        }
+        message+="\n Please choose a hero to fight with the coming monster: ";
+        String op = IO.getInstance().validString(message, options);
+        openFire(heros.get(Integer.parseInt(op)), m);
+    }
 
-    // 
+    // open fire between a hero and a moster: if the moster is dead, return 1, else return 0
+    public Integer openFire(Hero h, Monster m){
+        return 0;
+    }
+
+    // Intro Page
     public void intro() throws IOException{
         System.out.println("Welcome to Legends!");
     }

@@ -10,7 +10,7 @@ public class Potion extends Item implements Useable{
     private Integer attr_increse;
 
     Potion(String name_, Integer cost_, Integer required_level_, Integer attr_increse_, String attr_affected_){
-        super(name_, cost_, required_level_, "Potion");
+        super(name_, cost_, required_level_, "Potion", 1, 0, 0);
         attr_affected = attr_affected_;
         attr_increse = attr_increse_;
     }

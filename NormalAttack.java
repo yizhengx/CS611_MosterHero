@@ -15,12 +15,4 @@ public class NormalAttack implements AttackBehavior {
         reduces.add(damage);
         obj.receiveAttack(attr, reduces);
     }
-
-    @Override
-    public void setBaseDamage(Integer damage_) {
-        // TODO Auto-generated method stub
-        
-    }
-
-
 }

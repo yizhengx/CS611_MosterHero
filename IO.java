@@ -16,27 +16,26 @@ public class IO {
     }
 
     public Integer validInteger(String prompt, Integer start, Integer end){
-        System.out.println(prompt);
+        System.out.print(prompt);
         int b;
         while(true){
             try{
                 b = scan.nextInt();
-                if(b<start){System.out.println("Please input an integer larger than "+start+".");}
-                else if(b>end){System.out.println("Please input an integer smaller than "+end+".");}
+                if(b<start){System.out.print("Please input an integer larger than "+start+":");}
+                else if(b>end){System.out.print("Please input an integer smaller than "+end+":");}
                 else{
                     scan.nextLine();
                     break;
                 }
             }catch(Exception e){
-                System.out.println("Invalid input! Please input an Integer.");
-                b = scan.nextInt();
+                System.out.print("Invalid input! Please input an Integer:");
             }
         }
         return b;
     }
 
     public String validString(String prompt){
-        System.out.println(prompt);
+        System.out.print(prompt);
         String s = "";
         while(true){
             try{
@@ -44,25 +43,30 @@ public class IO {
                 break;
             }
             catch(Exception e){
-                System.out.println("Invalid input! Please input a string.");
+                System.out.print("Invalid input! Please input a string.");
             }
         }
         return s;
-    } 
+    }
 
-    public String validSingleString(String prompt, HashSet<String> allowed){
-        System.out.println(prompt);
+    public String anyString(String prompt){
+        System.out.print(prompt);
+        return scan.nextLine();
+    }
+
+    public String validString(String prompt, HashSet<String> allowed){
+        System.out.print(prompt);
         String s = "";
         while(true){
             try{
                 s = scan.nextLine();
-                if (s.length()!=1 || allowed.contains(s)==false){
-                    System.out.println("Invalid input! Please input valid input.");
+                if (allowed.contains(s)==false){
+                    System.out.print("Invalid input! Please input valid input.");
                 }
                 else{break;}
             }
             catch(Exception e){
-                System.out.println("Invalid input! Please input a character.");
+                System.out.print("Invalid input! Please input a character.");
             }
         }
         return s;

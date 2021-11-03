@@ -1,0 +1,61 @@
+Date : 2021-11-03 00:50:55
+Directory : /Users/yizhengxie/Documents/GitHub/CS611_MosterHero
+Total : 36 files,  1205 codes, 149 comments, 237 blanks, all 1591 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| Java     |         35 |      1,161 |        149 |        212 |      1,522 |
+| Markdown |          1 |         44 |          0 |         25 |         69 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                    | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                       |         36 |      1,205 |        149 |        237 |      1,591 |
++-------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                | language | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/Armory.java         | Java     |         13 |          2 |          5 |         20 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/AttackBehavior.java | Java     |          3 |          0 |          2 |          5 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/Attackable.java     | Java     |          4 |          1 |          1 |          6 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/Board.java          | Java     |         67 |          7 |         11 |         85 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/CanBeAttacked.java  | Java     |          4 |          0 |          1 |          5 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/Cell.java           | Java     |         39 |          5 |          7 |         51 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/ColorString.java    | Java     |         31 |          3 |          3 |         37 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/Equitable.java      | Java     |          3 |          0 |          1 |          4 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/Factory.java        | Java     |          9 |          0 |          2 |         11 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/Fightable.java      | Java     |          2 |          0 |          2 |          4 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/FileIO.java         | Java     |         54 |          2 |          7 |         63 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/Hero.java           | Java     |        138 |          8 |         21 |        167 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/IO.java             | Java     |         73 |          0 |          7 |         80 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/Item.java           | Java     |         29 |          2 |          6 |         37 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/LegendsGame.java    | Java     |        161 |         15 |          8 |        184 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/Market.java         | Java     |         68 |         28 |         12 |        108 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/Monster.java        | Java     |         31 |          6 |          8 |         45 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/NamedCreator.java   | Java     |         26 |          6 |          8 |         40 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/NormalAttack.java   | Java     |         15 |          0 |          4 |         19 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/Paladins.java       | Java     |          9 |          3 |          5 |         17 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/Player.java         | Java     |         46 |          2 |          8 |         56 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/Potion.java         | Java     |         20 |          2 |          4 |         26 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/README.md           | Markdown |         44 |          0 |         25 |         69 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/RandomCreator.java  | Java     |        104 |         37 |         13 |        154 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/Sorcerers.java      | Java     |          9 |          2 |          5 |         16 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/Spell.java          | Java     |         20 |          1 |          7 |         28 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/SpellAttack.java    | Java     |         21 |          0 |          4 |         25 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/SpellFire.java      | Java     |         22 |          2 |          8 |         32 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/SpellIce.java       | Java     |         19 |          1 |          6 |         26 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/SpellLighting.java  | Java     |         19 |          1 |          6 |         26 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/TypedCreator.java   | Java     |         26 |          6 |          9 |         41 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/Useable.java        | Java     |          4 |          4 |          1 |          9 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/Warriors.java       | Java     |          9 |          1 |          5 |         15 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/Weapon.java         | Java     |         28 |          2 |         11 |         41 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/WeaponAttack.java   | Java     |         17 |          0 |          4 |         21 |
+| /Users/yizhengxie/Documents/GitHub/CS611_MosterHero/inputTest.java      | Java     |         18 |          0 |          0 |         18 |
+| Total                                                                   |          |      1,205 |        149 |        237 |      1,591 |
++-------------------------------------------------------------------------+----------+------------+------------+------------+------------+

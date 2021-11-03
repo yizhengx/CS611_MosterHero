@@ -10,10 +10,14 @@ public abstract class Spell extends Item implements Attackable {
     protected SpellAttack attack_behavior;
 
     Spell(String name_, Integer cost_, Integer level_, Integer damage_, Integer mana_cost_){
-        super(name_, cost_, level_, "Spell");
+        super(name_, cost_, level_, "Spell", 0, 1, 0);
         damage = damage_;
         mana_cost = mana_cost_;
     }
+
+    public String getName(){return name;}
+    public abstract String getAffectedAttr();
+    public abstract Integer getAffectedRed();
 
     public void test(){
         System.out.println("Spell Class");

@@ -41,8 +41,13 @@ public class FileIO {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             ArrayList<String> file_content = new ArrayList<String>();
+            Integer count = 0;
             while ((line = br.readLine()) != null) {
                // process the line.
+               if (count==0){
+                   count = 1;
+                   continue;
+               }
                if (line.matches("[\\s]*")){continue;}
                file_content.add(line);
             //    System.out.println(line);

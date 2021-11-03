@@ -17,10 +17,4 @@ public class WeaponAttack implements AttackBehavior {
         reduces.add(base_damage+added_damage);
         obj.receiveAttack(attr, reduces);
     }
-
-    @Override
-    public void setBaseDamage(Integer damage_) {
-        // TODO Auto-generated method stub
-        
-    }
 }

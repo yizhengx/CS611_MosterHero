@@ -16,6 +16,7 @@ public class Player {
         icon = icon_;
         heros = new ArrayList<Hero>();
         heroConfigure();
+        dead = 0;
     }
 
     // Accessor
@@ -25,6 +26,7 @@ public class Player {
     public Integer getY(){return y;}
     public Integer getNumHeros(){return heros.size();}
     public Hero getHero(Integer index){return heros.get(index);}
+    public ArrayList<Hero> getHeros(){return heros;}
 
     // Setter
     public void setX(Integer x_){x = x_;}
@@ -33,6 +35,9 @@ public class Player {
     public void heroConfigure() throws IOException{
         for (int i=0; i<num; i++){
             heros.add(RandomCreator.getInstance().createHero(""));
+        }
+        for (int i=0; i<heros.size();i++){
+            System.out.println(heros.get(i).getName());
         }
     }
 
@@ -44,5 +49,9 @@ public class Player {
         }
         message += "\n" + "+++++++++++++++++++++++++++++++++++++++++++";
         return message;
+    }
+
+    public static void main(String[] args) throws IOException {
+        Player p = new Player("22", 2, "X");
     }
 }
