@@ -40,10 +40,12 @@ public class LegendsGame {
                 options.add("s");
                 message += "\ns: move down";
             }
-            options.add("q");
-            message += "\nq: quit";
+            options.add("u");
+            message += "\nu: use something, equip or unequip something.";
             options.add("i");
             message += "\ni: check info";
+            options.add("q");
+            message += "\nq: quit";
             String op = IO.getInstance().validString(message+"\nplease enter your move: ", options);
             if (op.equals("q")){break;}
             while (op.equals("i")){
@@ -53,6 +55,7 @@ public class LegendsGame {
                 op = IO.getInstance().validString(message+"\nplease enter your move:", options);
             }
             if (op.equals("m")){enter_market(current_player, board.getCell(current_player.getX(), current_player.getY()));}
+            else if(op.equals("u")){}
             else{
                 board.removePlayer(current_player.getX(), current_player.getY());
                 if (op.equals("w")){current_player.setX(current_player.getX()-1);}
@@ -99,17 +102,38 @@ public class LegendsGame {
         String message = "Now you have the following options to make:";
         HashSet<String> options = new HashSet<String>();
         if (h.getEquippArmory()!=null){
-            message+="a: unequip current armory "+h.getEquippArmory().getName();
+            message+="\na: unequip current armory "+h.getEquippArmory().getName();
             options.add("a");
         }
-        if (h.getEquippArmory()!=null){
-            message+="a: unequip current armory "+h.getEquippArmory().getName();
-            options.add("a");
+        if (h.getEquippedWeapon()!=null){
+            message+="\nw: unequip current weapon "+h.getEquippedWeapon().getName();
+            options.add("w");
         }
-        if (h.getEquippArmory()!=null){
-            message+="a: unequip current armory "+h.getEquippArmory().getName();
-            options.add("a");
+        if (h.getEquipables().size()>0){
+            ArrayList<Equitable> equitable_tools = h.getEquipables(); 
+            for (int i=0; i<equitable_tools.size(); i++){
+                message+=(i+1)+": equip this" + ((Item) equitable_tools.get(i)).getType()+" "+((Item) equitable_tools.get(i)).getName();
+                options.add(""+(i+1));
+            }
         }
+        Integer equitable_size = h.getEquipables().size();
+        if (h.getUseables().size()>0){
+            ArrayList<Useable> usable_tools = h.getUseables();
+            for (int i=0; i<usable_tools.size(); i++){
+                message+=(equitable_size+i+1)+": equip this" + ((Item) usable_tools.get(i)).getType()+" "+((Item) usable_tools.get(i)).getName();
+                options.add(""+(equitable_size+i+1));
+            }
+        }
+        if (options.size()==0){
+            message = "You dont have equipped tools or equitable/useable tools to equit or use.";
+            message += "\nq: quit";
+            options.add("q");
+        }else{
+            message += "\nq: quit";
+            options.add("q");
+        }
+        String op = IO.getInstance().validString(message, options);
+
     }
 
     public void enter_market(Player p, Cell c){

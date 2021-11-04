@@ -16,7 +16,7 @@ public abstract class Hero implements Attackable, CanBeAttacked{
     private Weapon equipped_weapon = null;
     private ArrayList<Item> items;
     private ArrayList<Attackable> attack_tools;
-    private ArrayList<Useable> useables_tools;
+    private ArrayList<Useable> useable_tools;
     private ArrayList<Equitable> equitable_tools;
     private AttackBehavior attack_behavior;
     
@@ -34,7 +34,7 @@ public abstract class Hero implements Attackable, CanBeAttacked{
         dodge_chance = 0;
         items = new ArrayList<Item>();
         attack_tools = new ArrayList<Attackable>();
-        useables_tools = new ArrayList<Useable>();
+        useable_tools = new ArrayList<Useable>();
         equitable_tools = new ArrayList<Equitable>();
     }
 
@@ -47,9 +47,16 @@ public abstract class Hero implements Attackable, CanBeAttacked{
     public String getName(){return name;}
     public Weapon getEquippedWeapon(){return equipped_weapon;}
     public Armory getEquippArmory(){return equipped_armory;}
+    public ArrayList<Equitable> getEquipables(){return equitable_tools;};
+    public ArrayList<Useable> getUseables(){return useable_tools;}
+    public ArrayList<Item> getItems(){return items;}
+
 
     // Setter
     public void setName(String name_){name = name_;}
+
+    // asbtract level up need to be specific on different types of hero
+    public abstract void level_up();
 
     // receive Item from a market
     public void recieveItem(Item obj){
@@ -60,24 +67,35 @@ public abstract class Hero implements Attackable, CanBeAttacked{
     }
     public void receiveAttackable(Attackable obj){attack_tools.add(obj);}
     public void recieveEquitable(Equitable obj){equitable_tools.add(obj);}
-    public void recieveUseable(Useable obj){useables_tools.add(obj);}
+    public void recieveUseable(Useable obj){useable_tools.add(obj);}
 
     // remove item
     public void removeItem(Item obj){
         items.remove(obj);
         if (obj.getAttackable()==1){attack_tools.remove((Attackable) obj);}
         if (obj.getEquitable()==1){equitable_tools.remove((Equitable) obj);}
-        if (obj.getUseable()==1){useables_tools.remove((Useable) obj);}
+        if (obj.getUseable()==1){useable_tools.remove((Useable) obj);}
 
     }
 
-    // return items
-    public ArrayList<Item> getItems(){return items;}
+    // Equip a equitable tool
+    public void equip(Equitable e){
+        String type = ((Item) e).getType();
+        if (type=="Armory"){equipped_armory = (Armory) e;}
+        if (type=="Weapon"){equipped_weapon = (Weapon) e;}
+        System.out.println("Hero "+name+" successfully equip "+ type + " " + ((Item) e).getName());
+    }
+    
+    // Unequip current equipped armory
+    public void unEquipArmory(){equipped_armory=null;}
+
+
+    public void unEquipWeapon(){equipped_weapon=null;}
 
     // Use one of the tools in useable_tool
     public void use(Useable obj){
         items.remove((Item) obj);
-        useables_tools.remove(obj);
+        useable_tools.remove(obj);
         Map<String, Integer> attr_details = obj.beUsed();
         for (Map.Entry<String, Integer> entry : attr_details.entrySet()){
            if (entry.getKey()=="Health"){
@@ -109,10 +127,6 @@ public abstract class Hero implements Attackable, CanBeAttacked{
         }
     }
 
-    
-
-    public abstract void level_up();
-
     @Override
     public void receiveAttack(ArrayList<String> attr_affected, ArrayList<Integer> attr_reduction) {
         Random rand = new Random();
@@ -120,12 +134,13 @@ public abstract class Hero implements Attackable, CanBeAttacked{
         if (randint<agility*0.1){
             System.out.println("Hero "+name+" sucessfully dodge this attack.");
         }else{
-            String massage = "";
             Integer damage = attr_reduction.get(0);
             if (equipped_armory!=null){
+                String message = "";
                 damage -= equipped_armory.getDamageRed();
                 if (damage<0){damage = 0;}
-                massage += "Due to armory "+equipped_armory.getName()+" protection, ";
+                message += "Due to armory "+equipped_armory.getName()+" protection, ";
+                System.out.println(message);
             }
             HP -= damage;
             System.out.println("Hero "+name+" loses "+damage+" HP.");
