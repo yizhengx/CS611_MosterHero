@@ -45,6 +45,8 @@ public abstract class Hero implements Attackable, CanBeAttacked{
     public Integer getExp(){return exp;}
     public Integer getLevel(){return level;}
     public String getName(){return name;}
+    public Weapon getEquippedWeapon(){return equipped_weapon;}
+    public Armory getEquippArmory(){return equipped_armory;}
 
     // Setter
     public void setName(String name_){name = name_;}
@@ -118,8 +120,15 @@ public abstract class Hero implements Attackable, CanBeAttacked{
         if (randint<agility*0.1){
             System.out.println("Hero "+name+" sucessfully dodge this attack.");
         }else{
-            HP -= attr_reduction.get(0);
-            System.out.println("Hero "+name+" loses "+attr_reduction.get(0)+" HP.");
+            String massage = "";
+            Integer damage = attr_reduction.get(0);
+            if (equipped_armory!=null){
+                damage -= equipped_armory.getDamageRed();
+                if (damage<0){damage = 0;}
+                massage += "Due to armory "+equipped_armory.getName()+" protection, ";
+            }
+            HP -= damage;
+            System.out.println("Hero "+name+" loses "+damage+" HP.");
         }
     }
 
@@ -153,6 +162,7 @@ public abstract class Hero implements Attackable, CanBeAttacked{
             options.add(""+(i+2));
             }
         }
+        message+="\nPlease choose attack you wanna make: ";
         String op = IO.getInstance().validString(message, options);
         if (op.equals("1")){attack(obj);}
         else if (equipped_weapon!=null){
@@ -161,26 +171,36 @@ public abstract class Hero implements Attackable, CanBeAttacked{
                 equipped_weapon.attack(obj);
             }
             else{
-                Integer index = Integer.parseInt(op)-2;
+                Integer index = Integer.parseInt(op)-3;
                 attack_tools.get(index).attack(obj);
             }
         }else{
-            Integer index = Integer.parseInt(op)-1;
+            Integer index = Integer.parseInt(op)-2;
             attack_tools.get(index).attack(obj);
         }
     }
 
+    // return a formatted string about items for display
+    public String getItemsInfo(){
+        String message = "Items: ";
+        if (items.size()==0){return message+"None";}
+        for (int i=0; i<items.size();i++){
+            message += "["+items.get(i).getType()+"] "+ items.get(i).getName();
+        }
+        return message;
+    }
+
     public String toString(){
         String message = "";
-        message += "name:"+name+"\n";
-        message += "HP:"+HP+"\n";
-        message += "mana:"+mana+"\n";
-        message += "strength:"+strength+"\n";
-        message += "agility:"+agility+"\n";
-        message += "dexterity:"+dexterity+"\n";
-        message += "money:"+money+"\n";
-        message += "exp:"+exp+"\n";
-        message += "level:"+level;
+        message += "Name:"+name;
+        message += " & HP:"+HP;
+        message += " & mana:"+mana;
+        message += " & strength:"+strength;
+        message += " & agility:"+agility;
+        message += " & dexterity:"+dexterity;
+        message += " & money:"+money;
+        message += " & exp:"+exp;
+        message += " & level:"+level;
         return message;
     }
 }

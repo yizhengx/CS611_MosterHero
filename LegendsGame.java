@@ -9,15 +9,16 @@ public class LegendsGame {
     //            -> end turn
     private ArrayList<Player> player_list =  new ArrayList<Player>();
     private Board board;
+    private Display gui = Display.getInstance();
 
     public void run() throws IOException{
-        intro();
+        gui.displayIntro();
         initialization();
         while (true){
             Player current_player = player_list.get(0);
-            System.out.println(board);
+            gui.displayMap(board);
             HashSet<String> options = new HashSet<String>();
-            String message = "";
+            String message = "Now you have the following movement choices: ";
             if (board.getCell(current_player.getX(), current_player.getY()).hasMarket()){
                 options.add("m");
                 message += "\nm: enter the market";
@@ -43,14 +44,22 @@ public class LegendsGame {
             message += "\nq: quit";
             options.add("i");
             message += "\ni: check info";
-            String op = IO.getInstance().validString(message+"\nplease enter your move:", options);
-            board.removePlayer(current_player.getX(), current_player.getY());
+            String op = IO.getInstance().validString(message+"\nplease enter your move: ", options);
+            if (op.equals("q")){break;}
+            while (op.equals("i")){
+                gui.displayMap(board);
+                gui.displayPlayer(current_player);
+                // options.remove("i");
+                op = IO.getInstance().validString(message+"\nplease enter your move:", options);
+            }
             if (op.equals("m")){enter_market(current_player, board.getCell(current_player.getX(), current_player.getY()));}
             else{
+                board.removePlayer(current_player.getX(), current_player.getY());
                 if (op.equals("w")){current_player.setX(current_player.getX()-1);}
                 if (op.equals("s")){current_player.setX(current_player.getX()+1);}
                 if (op.equals("a")){current_player.setY(current_player.getY()-1);}
                 if (op.equals("d")){current_player.setY(current_player.getY()+1);}
+                board.getPlayer(current_player.getX(), current_player.getY(), current_player.getIcon());
                 if (board.getCell(current_player.getX(), current_player.getY()).hasMarket()==false){
                     // determine fight or not
                     Random rand = new Random();
@@ -58,7 +67,48 @@ public class LegendsGame {
                     if (randint<=4){fight(current_player);}
                 }
             }
-            board.getPlayer(current_player.getX(), current_player.getY(), current_player.getIcon());
+        }
+    }
+
+    public void equitUse(Player p){
+        // choose hero for operations or quit()
+        System.out.println("Now you are allowed to use potions or equip/unequip armory or weapons.");
+        String message = "Here are the heros in your team:";
+        HashSet<String> options = new HashSet<String>();
+        for (int i=0; i<p.getNumHeros(); i++){
+            options.add(""+(i+1));
+            message += "\n"+(i+1)+". "+p.getHero(i).getName();
+        }
+        message += "\nq: quit the operation page.";
+        options.add("q");
+        message += "\nPlease select your hero to use potions or equip/unequip something: ";
+        String op = IO.getInstance().validString(message, options);
+        if (!op.equals("q")){
+            for (int i=0; i<p.getNumHeros(); i++){
+                if (op.equals(""+(i+1))){
+                    System.out.println("Now comes to " + p.getHero(i).getName() + " use potions or equip/unequip something.");
+                    equitUseHero(p.getHero(i));
+                    break;
+                }
+            }
+            equitUse(p);
+        }
+    }
+
+    public void equitUseHero(Hero h){
+        String message = "Now you have the following options to make:";
+        HashSet<String> options = new HashSet<String>();
+        if (h.getEquippArmory()!=null){
+            message+="a: unequip current armory "+h.getEquippArmory().getName();
+            options.add("a");
+        }
+        if (h.getEquippArmory()!=null){
+            message+="a: unequip current armory "+h.getEquippArmory().getName();
+            options.add("a");
+        }
+        if (h.getEquippArmory()!=null){
+            message+="a: unequip current armory "+h.getEquippArmory().getName();
+            options.add("a");
         }
     }
 
@@ -72,9 +122,9 @@ public class LegendsGame {
             options.add(""+(i+1));
             message += "\n"+(i+1)+". "+p.getHero(i).getName();
         }
-        message += "\nPlease select your hero to make buy/sell operations: ";
-        options.add("q");
         message += "\nq: quit the market.";
+        options.add("q");
+        message += "\nPlease select your hero to make buy/sell operations: ";
         String op = IO.getInstance().validString(message, options);
         if (!op.equals("q")){
             for (int i=0; i<p.getNumHeros(); i++){
@@ -162,25 +212,40 @@ public class LegendsGame {
 
     public void fight(Player p) throws IOException{
         ArrayList<Hero> heros = p.getHeros();
-        System.out.println("Oops!!! Monsters here! You encounter "+ heros.size()+ " monsters.");
-        Monster m = RandomCreator.getInstance().createMoster("");
-        System.out.println(m);
-        String message = "Now you have following heros to fight: ";
-        HashSet<String> options = new HashSet<String>();
-        for (int i=0; i<heros.size();i++){
-            if (heros.get(i).getHP()>0){
-                options.add(""+(i+1));
-                message += "\n"+(i+1)+": "+heros.get(i).getName();
+        System.out.println(ColorString.getColor("Oops!!! Monsters here! You encounter "+ heros.size()+ " monsters.", "red"));
+        ArrayList<Monster> monsters = new ArrayList<Monster>();
+        for (int i=0; i<p.getHeros().size(); i++){
+            Monster m = RandomCreator.getInstance().createMoster("");
+            while (m.getLevel()>p.getHero(i).getLevel()+2){
+                m = RandomCreator.getInstance().createMoster("");
             }
+            monsters.add(m);
+            System.out.println(ColorString.getColor(m.toString(), "red"));
         }
-        message+="\n Please choose a hero to fight with the coming monster: ";
-        String op = IO.getInstance().validString(message, options);
-        openFire(heros.get(Integer.parseInt(op)-1), m);
+        while (heros.size()>0 && monsters.size()>0){
+            Monster m_fighted = monsters.get(0);
+            String message = "Now you have following heros to fight with Monster "+m_fighted.getName()+": ";
+            HashSet<String> options = new HashSet<String>();
+            for (int i=0; i<heros.size();i++){
+                if (heros.get(i).getHP()>0){
+                    options.add(""+(i+1));
+                    message += "\n"+(i+1)+": "+heros.get(i).getName();
+                }
+            }
+            message+="\nPlease choose a hero to fight with the coming monster: ";
+            String op = IO.getInstance().validString(message, options);
+            Hero hero_fighted = heros.get(Integer.parseInt(op)-1);
+            Integer result = openFire(hero_fighted, m_fighted);
+            if (result==1){monsters.remove(m_fighted);}
+            else{heros.remove(hero_fighted);}
+        }
+        if (heros.size()==0){System.out.println(ColorString.getColor("Unfortunately, player "+p.getName()+" died.", "red"));}
+        else{System.out.println(ColorString.getColor("Congradualations!! player "+p.getName()+" wins this fight.", "green"));}
     }
 
     // open fire between a hero and a moster: if the moster is dead, return 1, else return 0
     public Integer openFire(Hero h, Monster m){
-        System.out.println("open fire");
+        System.out.println(ColorString.getColor("Open fire between "+h.getName()+" and "+m.getName()+"!", "red"));
         Integer turn = 1;
         while (h.getHP()>0 && m.getDefense()>0){
             if (turn==1){
@@ -193,21 +258,20 @@ public class LegendsGame {
                 turn = 1;
             }
         }
-        
-        return 0;
-    }
-
-    // Intro Page
-    public void intro() throws IOException{
-        System.out.println("Welcome to Legends!");
+        if (h.getHP()<=0){
+            System.out.println(ColorString.getColor("Unfortunately, Hero "+h.getName()+" died in this fight.", "red"));
+            return 0;
+        }
+        System.out.println(ColorString.getColor("Congradulations! Hero "+h.getName()+" wins this fight.", "green"));
+        return 1;
     }
 
     public void initialization() throws IOException{
         board = new Board();
-        Integer num_players = IO.getInstance().validInteger("Please enter the number of players:", 1, 5);
+        Integer num_players = IO.getInstance().validInteger("Please enter the number of players: ", 1, 5);
         for (int i=0; i<num_players;i++){
-            String name_ = IO.getInstance().validString("Please enter the name for player "+(i+1));
-            Integer num_ = IO.getInstance().validInteger("Please enter the number of heros for player "+(i+1), 1, 3);
+            String name_ = IO.getInstance().validString("Please enter the name for player "+(i+1)+": ");
+            Integer num_ = IO.getInstance().validInteger("Please enter the number of heros for player "+(i+1)+": ", 1, 3);
             Player new_player = new Player(name_, num_, ""+(i+1));
             ArrayList<Integer> xy = board.getRandomCell();
             new_player.setX(xy.get(0));

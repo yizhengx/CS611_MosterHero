@@ -29,6 +29,8 @@ public class Monster implements Attackable, CanBeAttacked{
     }
 
     public Integer getDefense(){return defense;}
+    public Integer getLevel(){return level;}
+    public String getName(){return name;}
 
     @Override
     public void receiveAttack(ArrayList<String> attr_affected, ArrayList<Integer> attr_reduction) {
@@ -64,6 +66,7 @@ public class Monster implements Attackable, CanBeAttacked{
     public void attack(CanBeAttacked obj) {
         // TODO Auto-generated method stub
         attack_behavior =  new NormalAttack(damage);
+        System.out.println("Monster makes an attack with damage "+damage+"!");
         attack_behavior.attack(obj);
     }
 

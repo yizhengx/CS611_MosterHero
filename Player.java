@@ -37,7 +37,7 @@ public class Player {
             heros.add(RandomCreator.getInstance().createHero(""));
         }
         for (int i=0; i<heros.size();i++){
-            System.out.println(heros.get(i).getName());
+            System.out.println("Player "+name+" gets hero "+heros.get(i).getName());
         }
     }
 

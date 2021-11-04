@@ -10,6 +10,8 @@ public class Armory extends Item implements Equitable{
         damage_red = damage_red_;
     }
 
+    public Integer getDamageRed(){return damage_red;}
+
     @Override
     public void equit() {
         // TODO Auto-generated method stub
