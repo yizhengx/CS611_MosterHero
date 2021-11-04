@@ -87,10 +87,15 @@ public abstract class Hero implements Attackable, CanBeAttacked{
     }
     
     // Unequip current equipped armory
-    public void unEquipArmory(){equipped_armory=null;}
+    public void unEquipArmory(){
+        System.out.println("Hero "+name+" successfully unequip Armory " + equipped_armory.getName());
+        equipped_armory=null;
+    }
 
-
-    public void unEquipWeapon(){equipped_weapon=null;}
+    public void unEquipWeapon(){
+        System.out.println("Hero "+name+" successfully unequip Weapon " + equipped_weapon.getName());
+        equipped_weapon=null;
+    }
 
     // Use one of the tools in useable_tool
     public void use(Useable obj){

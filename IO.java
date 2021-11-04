@@ -29,6 +29,7 @@ public class IO {
                 }
             }catch(Exception e){
                 System.out.print("Invalid input! Please input an Integer:");
+                scan.nextLine();
             }
         }
         return b;

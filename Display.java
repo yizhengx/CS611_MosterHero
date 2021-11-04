@@ -40,12 +40,15 @@ public class Display {
     }
 
     public static void displayPlayer(Player p){
-        String message = "+++++++++++++++++++++++  Player "+p.getName()+" Info  ++++++++++++++++++++++";
+        String message = "++++++++++++++++++++++++++++++++++++++++++++++  Player "+p.getName()+" Info  +++++++++++++++++++++++++++++++++++++++++++++";
+        Integer top_line = message.length();
         ArrayList<Hero> heros = p.getHeros();
         for (int i=0; i<heros.size();i++){
             message += "\nHero "+(i+1)+": " + heros.get(i);
             message += "\nHero "+(i+1)+": " + heros.get(i).getItemsInfo();
         }
+        message += "\n";
+        for (int i=0;i<top_line;i++){message+="+";}
         System.out.println(message);
         // System.out.printf("%-12s%-12s%-12s%-12s\n"," ","Hero 1","Hero 2", "Hero 3");
         // System.out.printf("%-12s%-12s%-12s%-12s\n","Name","...","asdfadsfasf","adsfa2322");
