@@ -1,9 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- * Monster
- */
+// Monster Class: class for any type of monster
 public class Monster implements Attackable, CanBeAttacked{
     
     private String name;

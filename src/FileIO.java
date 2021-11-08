@@ -5,18 +5,18 @@ import java.util.ArrayList;
 
 // FileIO Class: parse all file contents to string contents
 public class FileIO {
-    private final String FireSpells_path = "config/FireSpells.txt";
-    private final String IceSpells_path = "config/IceSpells.txt";
-    private final String LightningSpells_path = "config/LightningSpells.txt";
-    private final String Sorcerers_path = "config/Sorcerers.txt";
-    private final String Warriors_path = "config/Warriors.txt";
-    private final String Paladins_path = "config/Paladins.txt";
-    private final String Spirits_path = "config/Spirits.txt";
-    private final String Dragons_path = "config/Dragons.txt";
-    private final String Exoskeletons_path = "config/Exoskeletons.txt";
-    private final String Armory_path = "config/Armory.txt";
-    private final String Weaponry_path = "config/Weaponry.txt";
-    private final String Potions_path = "config/Potions.txt";
+    private final String FireSpells_path = "ConfigFiles/FireSpells.txt";
+    private final String IceSpells_path = "ConfigFiles/IceSpells.txt";
+    private final String LightningSpells_path = "ConfigFiles/LightningSpells.txt";
+    private final String Sorcerers_path = "ConfigFiles/Sorcerers.txt";
+    private final String Warriors_path = "ConfigFiles/Warriors.txt";
+    private final String Paladins_path = "ConfigFiles/Paladins.txt";
+    private final String Spirits_path = "ConfigFiles/Spirits.txt";
+    private final String Dragons_path = "ConfigFiles/Dragons.txt";
+    private final String Exoskeletons_path = "ConfigFiles/Exoskeletons.txt";
+    private final String Armory_path = "ConfigFiles/Armory.txt";
+    private final String Weaponry_path = "ConfigFiles/Weaponry.txt";
+    private final String Potions_path = "ConfigFiles/Potions.txt";
     private static FileIO file_reader = null;
 
     public static FileIO getInstance(){

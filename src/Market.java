@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
 
+// Market Class: class for a market which contains many items
 public class Market {
 
     private ArrayList<Item> items;

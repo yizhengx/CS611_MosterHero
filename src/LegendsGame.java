@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.util.*;
 
+// LegendsGame Class: all logical running process for this game
 public class LegendsGame {
     // simplify game logic:
     // get player -> move
@@ -10,7 +11,7 @@ public class LegendsGame {
     private ArrayList<Player> player_list =  new ArrayList<Player>();
     private Board board;
     private Display gui = Display.getInstance();
-    private Music bgm_player = new Music("config/bgm.wav");
+    private Music bgm_player = new Music("ConfigFiles/bgm.wav");
 
     // Run the game
     public void run() throws IOException{
@@ -158,7 +159,7 @@ public class LegendsGame {
         ArrayList<Useable> useable_tools = h.getUseables();
         if (h.getUseables().size()>0){
             for (int i=0; i<useable_tools.size(); i++){
-                message+="\n"+(equitable_tools.size()+i+1)+": use this" + ((Item) useable_tools.get(i)).getType()+" "+((Item) useable_tools.get(i)).getName();
+                message+="\n"+(equitable_tools.size()+i+1)+": use " + ((Item) useable_tools.get(i)).getType()+" "+((Item) useable_tools.get(i)).getName();
                 options.add(""+(equitable_tools.size()+i+1));
             }
         }

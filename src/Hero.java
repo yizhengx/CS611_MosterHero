@@ -1,5 +1,6 @@
 import java.util.*;
 
+// Hero Class: abstract class for all types of heroes
 public abstract class Hero implements Attackable, CanBeAttacked{
     // Name/mana/strength/agility/dexterity/starting money/starting experience
     protected String name;
@@ -157,7 +158,7 @@ public abstract class Hero implements Attackable, CanBeAttacked{
             String message = "";
             Integer damage = attr_reduction.get(0);
             if (equipped_armory!=null){
-                damage -= equipped_armory.getDamageRed();
+                damage -= equipped_armory.getDamageRed()/10;
                 if (damage<0){damage = 0;}
                 message += "Due to armory "+equipped_armory.getName()+" protection, ";
             }
